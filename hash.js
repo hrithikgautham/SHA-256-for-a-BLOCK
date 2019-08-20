@@ -6,11 +6,9 @@ const getSha256 = (block, nonce) => crypto.createHash('sha256').update(`${block}
 
 function checkRequiredZeroes(hash, zeros) {
     let i = 0;
-    while(i < zeros){
-        if(hash[i] != '0')
+    while(i < zeros)
+        if(hash[i++] != '0')
             return false;
-        i++;
-    }
     return true;
 }
 
