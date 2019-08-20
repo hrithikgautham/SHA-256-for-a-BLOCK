@@ -13,17 +13,20 @@ function checkRequiredZeroes(hash, zeros) {
 }
 
 function getHash(block, zeros) {
+    if(zeros >= 64)
+        return ['no of zeros exceeded', 'are you crazy'];
     let result;
     result = getSha256(block, '');
     if(checkRequiredZeroes(result, zeros))
         return [result, ''];
     let nonce = 0;// 4 Byte number
-    while(true) {
+    while(nonce < Math.pow(2, 32)) {
         result = getSha256(block, nonce.toString());
         if(checkRequiredZeroes(result, zeros))
             return [result, nonce.toString()];
         nonce++;
     }
+    return ['couldnt find hash', nonce.toString()];
 }
 
 module.exports = { getHash, getSha256 };
