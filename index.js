@@ -1,6 +1,7 @@
-const { getHash, getHash256 } = require('./hash');
+const { getHash } = require('./hash');
 
-let result = getHash('a', 5);
+const targetString = 'a';
+let result = getHash(targetString, 5);
 if(result !== ''){
     const [hash, nonce] = result;
     console.log(`HASH: ${hash}, NONCE: ${nonce}`);
