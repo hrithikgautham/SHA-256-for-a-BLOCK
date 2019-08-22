@@ -1,10 +1,8 @@
 const { getHash } = require('./hash');
 
-const targetString = 'a';
-let result = getHash(targetString, 7);
-if(result !== ''){
-    const [hash, nonce] = result;
-    console.log(`HASH: ${hash}, NONCE: ${nonce}`);
+function resolve(targetString, noOfZeros) {
+    let result = getHash(targetString, noOfZeros);
+    return result !== null ? result : null;
 }
-else
-    console.log('FAILED');
+
+module.exports = resolve;
