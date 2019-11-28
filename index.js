@@ -1,10 +1,13 @@
-const { getHash } = require('./hash');
+const { getHash: getBlockHashWithNonce, getSha256 } = require('./hash');
 
-const targetString = 'a';
-let result = getHash(targetString, 7);
-if(result !== ''){
-    const [hash, nonce] = result;
-    console.log(`HASH: ${hash}, NONCE: ${nonce}`);
-}
-else
-    console.log('FAILED');
+// const targetString = 'a';
+
+const getHash = (blockHash, difficulty, delimiter) => {
+    const [hash, nonce] = getBlockHashWithNonce(blockHash, difficulty, delimiter);
+    return {
+        newHash: hash,
+        nonce
+    };
+};
+
+module.exports = { getHash, getSha256 };
