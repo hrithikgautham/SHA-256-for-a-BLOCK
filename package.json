@@ -1,12 +1,12 @@
 {
-  "name": "sha",
-  "version": "1.0.0",
-  "description": "",
+  "name": "block-POW",
+  "version": "1.0.1",
+  "description": "simple code to generate block hash of blockchain (proof-of-work).",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["blockchain"],
+  "author": "Hrithik gautham TG",
   "license": "ISC"
 }
