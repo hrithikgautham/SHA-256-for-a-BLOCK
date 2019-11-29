@@ -1,8 +1,14 @@
 const crypto = require('crypto');
+const { 
+    isParameterAbsent, 
+    checkDiffuculty, 
+    checkBlockHash,
+    isString
+} = require("./typeCheck/check");
 
 //code to generate SHA 256 hash
 
-const getSha256 = (block, nonce, delimiter) => crypto.createHash('sha256').update(`${block}${delimiter}${nonce}`).digest('hex');
+const getSha256 = (block = isParameterAbsent("No String provide for hashing"), nonce = "", delimiter = "") => crypto.createHash('sha256').update(`${block}${delimiter}${nonce}`).digest('hex');
 
 function checkRequiredZeroes(hash, zeros) {
     let i = 0;
@@ -12,22 +18,23 @@ function checkRequiredZeroes(hash, zeros) {
     return true;
 }
 
-function getHash(blockHash, zeros, delimiter) {
-    if(zeros >= 64)
-        return new Error("difficulty is off the charts!");
-    if(blockHash.length != 64)
-        return new Error("Block hash should be a valid SHA-256 hash");
+function getHash(blockHash = isParameterAbsent("Block Hash is not provided!"), zeros = isParameterAbsent("Network difficulty is not provided"), delimiter = "") {
+    checkDiffuculty(zeros);
+    checkBlockHash(blockHash);
+    isString(blockHash);
+    isString(delimiter);
     if(checkRequiredZeroes(blockHash, zeros))
-        return [blockHash, ''];
+        return [blockHash, ''];// if the hash already meets the requirement then nonce will be "" .
     let nonce = 0;// 4 Byte number
     let newBlockHash = "";
-    while(nonce < Math.pow(2, 32)) {
+    const MAX = Math.pow(2, 32);
+    while(nonce < MAX) {
         newBlockHash = getSha256(blockHash, nonce.toString(), delimiter);
         if(checkRequiredZeroes(newBlockHash, zeros))
-            return [newBlockHash, nonce.toString()];
+            return [newBlockHash, nonce];
         nonce++;
     }
-    return new Error("Couldn't find Hash!");
+    throw new Error("Couldn't find Hash!");
 }
 
 module.exports = { getHash, getSha256 };
