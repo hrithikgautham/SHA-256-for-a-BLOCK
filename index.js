@@ -3,12 +3,12 @@ const { isParameterAbsent } = require("./typeCheck/check");
 
 // const targetString = 'a';
 
-const getHash = (
+const getHash = async (
     blockHash = isParameterAbsent("block hash needed!"), 
     difficulty = isParameterAbsent("difficulty needed!"), 
     delimiter = ""
 ) => {
-    const [hash, nonce] = getBlockHashWithNonce(blockHash, difficulty, delimiter);// default delimiter is "".
+    const [hash, nonce] = await getBlockHashWithNonce(blockHash, difficulty, delimiter);// default delimiter is "".
     return {
         newString: `${blockHash}${delimiter}${nonce}`,
         newHash: hash,

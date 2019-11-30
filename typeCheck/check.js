@@ -3,29 +3,39 @@ function isParameterAbsent(msg) {
 }
 
 function checkDiffuculty(zeros) {
-    if(zeros >= 64)// check if zeros doesn't exceed 63
-        throw new Error("difficulty is off the charts!");
-    if(Math.floor(zeros) !== zeros)// check if it is a integer
-        throw new Error("Difficulty must be an 'Integer'.");
-    return;
+    return new Promise((resolve, reject) => {
+        if(zeros >= 64)// check if zeros doesn't exceed 63
+            reject(new Error("difficulty is off the charts!"));
+        if(Math.floor(zeros) !== zeros)// check if it is a integer
+            reject(new Error("Difficulty must be an 'Integer'."));
+        resolve();
+    });
 }
 
 function checkBlockHash(blockHash) {
-    if(blockHash.length !== 64)// check if the hash is 256 bits
-        throw new Error("Block hash should be a valid SHA-256 hash in HEX format");
-    if(!blockHash.match(/^[0-9a-f]*$/gi))// check if hash has valid characters
-        throw new Error("Block Hash has invalid characters.");
-    return;
+    return new Promise((resolve, reject) => {
+        if(blockHash.length !== 64)// check if the hash is 256 bits
+            reject(new Error("Block hash should be a valid SHA-256 hash in HEX format"));
+        if(!blockHash.match(/^[0-9a-f]*$/gi))// check if hash has valid characters
+            reject(new Error("Block Hash has invalid characters."));
+        resolve();
+    });
 }
 
 function isString(inputString) {
-    if(typeof inputString !== 'string')// check if it is a string
-        throw new Error("Not a String!");
+    return new Promise((resolve, reject) => {
+        if(typeof inputString !== 'string')// check if it is a string
+            reject(new Error("Not a String!"));
+        resolve();
+    });
 }
 
 function isNumber(inputNumber) {
-    if(typeof inputNumber !== 'number')// check if it is a string
-        throw new Error("Not a Number!");
+    return new Promise((resolve,reject) => {
+        if(typeof inputNumber !== 'number')// check if it is a string
+            reject(new Error("Not a Number!"));
+        resolve();
+    });
 }
 
 module.exports = { isParameterAbsent, checkDiffuculty, checkBlockHash, isString, isNumber };

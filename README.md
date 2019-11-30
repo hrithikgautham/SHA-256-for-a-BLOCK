@@ -9,14 +9,20 @@
 
 ## HOW TO USE?<br><hr>
 
-#### `const { getHash, getSha256 } = require("block-pow");`
-#### `const hash = getSha256(inputString, nonce, delimiter)`
+<code>
+const { getHash, getSha256 } = require("block-pow");<br><br>
+// to find SHA-256 hash<br>
+<blockquote>
+getSha256(inputString, nonce, delimiter)<br>.then(console.log)<br>.catch(console.error);
+</blockquote><br>
 
-#### `/*` 
-#### `the above code generates SHA-256 hash for any string.To find the hash of "inputString", use "nonce"="" and "delimiter"="" or we could just use "getSha256(inputString)"`
-#### `*/`
-#### `const { newString, newHash, nonce } = getHash(blockHash, difficulty, delimiter);`
-#### `/* The applicability of "getHash()" is explained below. */`<br><br><br>
+/*<br>
+the above code generates SHA-256 hash for any string.To<br> find the hash of "inputString", use "nonce"="" and "delimiter"="" or<br> we could just use "getSha256(inputString)"<br>
+*/<br><br>
+// to find hash of a block with appropriate nonce<br>
+<blockquote>
+getHash(blockHash, difficulty, delimiter)<br>.then(({ newString, newHash, nonce }) => console.log(newHash))<br>.catch(console.error);</blockquote><br><br>
+/ * The applicability of "getHash()" is explained below. */</code><br><br><br>
 
 ### ***IMPORTANT*** : After importing make sure that you pass **block hash**, **difficulty level** and **delimiter**.<br><br><br>
 
@@ -45,17 +51,25 @@
 ### ***NOTE***: the above hash can be generated using **crypto** module of **Node JS**. Or it can also be generated using ***getSha256(string, nonce, delimiter)***.<br><br>
 ### * given network difficulty is **60** (meaning the first 60 characters of the hash should start with **zero**).
 ### * For simplicity, we can use the **delimiter** as **"."** .<br><br>
-#### `// first import the module`
-#### `const { getHash } = require('block-pow);`
-#### `const { newString, newHash, nonce } = getHash("6b88c087247aa2f07ee1c5956b8e1a9f4c7f892a70e324f1bb3d161e05ca107b", 60, ".");`
-#### `/* `
-#### `` "newString" has "blockHash" appended with "delimiter" and "nonce".i,e; inputString = `${blockHash}${delimiter}${nonce}`.``
-#### ` */ `
-#### `/* `
-#### ` the new hash after the computation will be stored in "newHash" variable. i,e; SHA-256 hash of "inputString" will be stored in "newHash" variable.`
-#### ` */ `
-#### `// the "NONCE" required to generate the "newHash" will be stored in "nonce" varaible`.<br><br><br>
+<code>
+// first import the module<br>
+const { getHash } = require('block-pow);<br><br>
+// here calculate() is a user defined function.<br><br>
+<blockquote>async function calculate(blockHash, difficulty, delimiter) {</blockquote><br>
+// getHash() returns a promise<br><br>
+<blockquote>const { newString, newHash, nonce } = await getHash(blockHash, difficulty, delimiter);</blockquote><br><br>
+<blockquote>console.log("new string:", newString, "new Hash: ", newHash, "nonce: ", nonce);</blockquote><br>
+}<br><br>
+<blockquote>calculate("6b88c087247aa2f07ee1c5956b8e1a9f4c7f892a70e324f1bb3d161e05ca107b", 60, ".");</blockquote><br>
+/* <br>
+ "newString" has "blockHash" appended with "delimiter"<br> and "nonce".i,e; inputString = `${blockHash}${delimiter}${nonce}`.<br>
+*/<br><br>
+/*<br>
+the new hash after the computation will be stored in<br> "newHash" variable. i,e; SHA-256 hash of "inputString" will be stored in "newHash" variable.<br>
+ */ <br><br>
+// the "NONCE" required to generate the "newHash" <br>will be stored in "nonce" varaible.<br><br><br>
+</code>
 
-## ***THANK YOU!***<br><br><hr>
+## **THANK YOU!**<br><br><hr>
 
-# For more information visit ***[github repo](https://github.com/hrithikgautham/SHA-256-for-a-BLOCK)***.
+# For more information visit **[github repo](https://github.com/hrithikgautham/SHA-256-for-a-BLOCK)**.
