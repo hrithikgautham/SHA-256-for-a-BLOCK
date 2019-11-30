@@ -1,9 +1,9 @@
 
-# **block-pow**<br><br>
+# **block-pow** (now with Promises)<br><br>
 
 ## A simple module to generate proof-of-work.
 
-#### Aim is to generate SHA-256 hash for a block in blockchain with NONCE.
+#### Aim is to generate Asynchronous SHA-256 hash for a block in blockchain with NONCE.
 
 #### It generates the appropriate hash according to the network difficulty.<br><br><br>
 
@@ -11,7 +11,7 @@
 
 <code>
 const { getHash, getSha256 } = require("block-pow");<br><br>
-// to find SHA-256 hash<br>
+// to find SHA-256 hash
 <blockquote>
 getSha256(inputString, nonce, delimiter)<br>.then(console.log)<br>.catch(console.error);
 </blockquote>
@@ -57,7 +57,7 @@ const { getHash } = require('block-pow');<br><br>
 // here calculate() is a user defined function.<br>
 <blockquote>async function calculate(blockHash, difficulty, delimiter) {<br><br>
 // getHash() returns a promise<br>
-const { newString, newHash, nonce } = await getHash(blockHash, difficulty, delimiter);<br>
+const { newString, newHash, nonce } = await getHash(blockHash, difficulty, delimiter);<br><br>
 console.log("new string:", newString, "new Hash: ", newHash, "nonce: ", nonce);<br><br>
 }</blockquote><br>
 <blockquote>calculate("6b88c087247aa2f07ee1c5956b8e1a9f4c7f892a70e324f1bb3d161e05ca107b", 60, ".");</blockquote><br>
@@ -72,4 +72,4 @@ the new hash after the computation will be stored in<br> "newHash" variable. i,e
 
 ## **THANK YOU!**<br><br><hr>
 
-# For more information visit **[github repo](https://github.com/hrithikgautham/SHA-256-for-a-BLOCK)**.
+# For more info, visit **[github repo](https://github.com/hrithikgautham/SHA-256-for-a-BLOCK)**.
