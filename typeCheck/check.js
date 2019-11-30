@@ -5,8 +5,6 @@ function isParameterAbsent(msg) {
 function checkDiffuculty(zeros) {
     if(zeros >= 64)// check if zeros doesn't exceed 63
         throw new Error("difficulty is off the charts!");
-    if(typeof zeros !== 'number')// check if it a number
-        throw new Error("Difficulty must be of type 'Number'.");
     if(Math.floor(zeros) !== zeros)// check if it is a integer
         throw new Error("Difficulty must be an 'Integer'.");
     return;
@@ -22,7 +20,12 @@ function checkBlockHash(blockHash) {
 
 function isString(inputString) {
     if(typeof inputString !== 'string')// check if it is a string
-        throw new Error("blockhash and delimiter must be of type 'String'.");
+        throw new Error("Not a String!");
 }
 
-module.exports = { isParameterAbsent, checkDiffuculty, checkBlockHash, isString };
+function isNumber(inputNumber) {
+    if(typeof inputNumber !== 'number')// check if it is a string
+        throw new Error("Not a Number!");
+}
+
+module.exports = { isParameterAbsent, checkDiffuculty, checkBlockHash, isString, isNumber };
