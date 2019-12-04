@@ -1,14 +1,15 @@
-const { getHash: getBlockHashWithNonce, getSha256 } = require('./hash');
+const { getHash: getBlockHashWithNonce, getSha256: getHash } = require('./hash');
 const { isParameterAbsent } = require("./typeCheck/check");
 
 // const targetString = 'a';
 
-const getHash = async (
+const getBlockHash = async (
     blockHash = isParameterAbsent("block hash needed!"), 
     difficulty = isParameterAbsent("difficulty needed!"), 
-    delimiter = ""
+    delimiter = "",
+    hashAlgo = isParameterAbsent('didnt specify hash algorithm')
 ) => {
-    const [hash, nonce] = await getBlockHashWithNonce(blockHash, difficulty, delimiter);// default delimiter is "".
+    const [hash, nonce] = await getBlockHashWithNonce(blockHash, difficulty, delimiter, hashAlgo);// default delimiter is "".
     return {
         newString: `${blockHash}${delimiter}${nonce}`,
         newHash: hash,
@@ -16,4 +17,4 @@ const getHash = async (
     };
 };
 
-module.exports = { getHash, getSha256 };
+module.exports = { getHash, getBlockHash };

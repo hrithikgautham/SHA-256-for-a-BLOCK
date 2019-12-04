@@ -1,6 +1,6 @@
 {
   "name": "block-pow",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "simple code to generate block hash of blockchain (proof-of-work).",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,8 @@
     "bitcoin", 
     "ethereum", 
     "mining", 
-    "miner"
+    "miner",
+    "proof-of-stake"
   ],
   "author": "Hrithik gautham TG",
   "license": "ISC"

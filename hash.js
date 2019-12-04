@@ -9,27 +9,31 @@ const {
 
 //code to generate SHA 256 hash
 
-const getSha256 = (
+const getSha = (
     block = isParameterAbsent("No String provide for hashing"), 
     nonce = "", 
-    delimiter = ""
+    delimiter = "",
+    hashAlgo = 'sha1'
 ) => (
     new Promise((resolve, reject) => {
         const data = crypto
-        .createHash('sha256')
+        .createHash(hashAlgo)
         .update(`${block}${delimiter}${nonce}`)
         .digest('hex');
         resolve(data);
     })
 )
 
-async function getHash(blockHash, zeros, delimiter) {
+async function getHash(blockHash, zeros, delimiter, hashAlgo) {
     try {
-        await checkDiffuculty(zeros);
-        await checkBlockHash(blockHash);
         await isString(blockHash);
         await isString(delimiter);
         await isNumber(zeros);
+        const availableHashingAlgorithms = ['sha256', 'sha512', 'sha1'];
+        if(!availableHashingAlgorithms.includes(hashAlgo))
+            throw new Error(`${hashAlgo} hash algorithm not provided!`);
+        await checkDiffuculty(zeros, hashAlgo);
+        await checkBlockHash(blockHash, hashAlgo);
         const startingPattern = "0".repeat(zeros);
         if(blockHash.startsWith(startingPattern))
             return [blockHash, ''];// if the hash already meets the requirement then nonce will be "" .
@@ -37,7 +41,7 @@ async function getHash(blockHash, zeros, delimiter) {
         let newBlockHash = "";
         const MAX = Math.pow(2, 32);
         while(nonce < MAX) {
-            newBlockHash = await getSha256(blockHash, nonce.toString(), delimiter);
+            newBlockHash = await getSha(blockHash, nonce.toString(), delimiter, hashAlgo);
             if(newBlockHash.startsWith(startingPattern))
                 return [newBlockHash, nonce];
             nonce++;
@@ -49,4 +53,4 @@ async function getHash(blockHash, zeros, delimiter) {
     }
 }
 
-module.exports = { getHash, getSha256 };
+module.exports = { getHash, getSha };
