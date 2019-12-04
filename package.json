@@ -1,6 +1,6 @@
 {
   "name": "block-pow",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "simple code to generate block hash of blockchain (proof-of-work).",
   "main": "index.js",
   "scripts": {

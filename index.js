@@ -1,4 +1,4 @@
-const { getHash: getBlockHashWithNonce, getSha256: getHash } = require('./hash');
+const { getHash: getBlockHashWithNonce, getSha: getHash } = require('./hash');
 const { isParameterAbsent } = require("./typeCheck/check");
 
 // const targetString = 'a';
