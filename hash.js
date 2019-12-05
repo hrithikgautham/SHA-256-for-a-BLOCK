@@ -9,7 +9,7 @@ const {
 
 //code to generate SHA 256 hash
 
-const getSha = (
+const getHash = (
     block = isParameterAbsent("No String provide for hashing"), 
     nonce = "", 
     delimiter = "",
@@ -24,7 +24,7 @@ const getSha = (
     })
 )
 
-async function getHash(blockHash, zeros, delimiter, hashAlgo) {
+async function getBlockHashUtil(blockHash, zeros, delimiter, hashAlgo) {
     try {
         await isString(blockHash);
         await isString(delimiter);
@@ -41,7 +41,7 @@ async function getHash(blockHash, zeros, delimiter, hashAlgo) {
         let newBlockHash = "";
         const MAX = Math.pow(2, 32);
         while(nonce < MAX) {
-            newBlockHash = await getSha(blockHash, nonce.toString(), delimiter, hashAlgo);
+            newBlockHash = await getHash(blockHash, nonce.toString(), delimiter, hashAlgo);
             if(newBlockHash.startsWith(startingPattern))
                 return [newBlockHash, nonce];
             nonce++;
@@ -49,8 +49,14 @@ async function getHash(blockHash, zeros, delimiter, hashAlgo) {
         throw new Error("Couldn't find Hash!");
     }
     catch(err) {
-        console.error("Error: error in getHash(); err: ", err);
+        console.error("Error: error in getBlockHashUtil(); err: ", err);
     }
 }
 
-module.exports = { getHash, getSha };
+module.exports = { 
+    getBlockHashUtil,
+    getHash,
+    isParameterAbsent,
+    isString,
+    isNumber
+};
