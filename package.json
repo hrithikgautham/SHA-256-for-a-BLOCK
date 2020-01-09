@@ -1,10 +1,10 @@
 {
   "name": "block-pow",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "simple code to generate block hash of blockchain (proof-of-work).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node a"
   },
   "repository": {
     "type": "git",

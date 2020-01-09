@@ -1,3 +1,5 @@
+"use strict"
+
 function isParameterAbsent(msg) {
     throw new Error(msg);
 }
@@ -24,7 +26,7 @@ function checkBlockHash(blockHash, hashAlgo) {
             blockHash.length !== 40 && hashAlgo === 'sha1'
         )// check if the hash is 256 bits
             reject(new Error(`Block hash should be a valid hash in HEX format`));
-        if(!blockHash.match(/^[0-9a-f]*$/gi))// check if hash has valid characters
+        if(!(/^[0-9a-f]*$/gi).test(blockHash))// check if hash has valid characters
             reject(new Error("Block Hash has invalid characters."));
         resolve();
     });
@@ -46,4 +48,10 @@ function isNumber(inputNumber) {
     });
 }
 
-module.exports = { isParameterAbsent, checkDiffuculty, checkBlockHash, isString, isNumber };
+module.exports = { 
+    isParameterAbsent, 
+    checkDiffuculty, 
+    checkBlockHash, 
+    isString, 
+    isNumber 
+};

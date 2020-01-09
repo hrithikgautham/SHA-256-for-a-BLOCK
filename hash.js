@@ -1,3 +1,5 @@
+"use strict"
+
 const crypto = require('crypto');
 const { 
     isParameterAbsent, 
@@ -22,14 +24,14 @@ const getHash = (
         .digest('hex');
         resolve(data);
     })
-)
+);
 
 async function getBlockHashUtil(blockHash, zeros, delimiter, hashAlgo) {
     try {
         await isString(blockHash);
         await isString(delimiter);
         await isNumber(zeros);
-        const availableHashingAlgorithms = ['sha256', 'sha512', 'sha1'];
+        const availableHashingAlgorithms = ['sha1', 'sha256', 'sha512'];
         if(!availableHashingAlgorithms.includes(hashAlgo))
             throw new Error(`${hashAlgo} hash algorithm not provided!`);
         await checkDiffuculty(zeros, hashAlgo);

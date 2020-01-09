@@ -1,9 +1,9 @@
+"use strict"
+
 const { 
     getBlockHashUtil, 
     getHash,
     isParameterAbsent,
-    isString,
-    isNumber
 } = require('./hash');
 
 // const targetString = 'a';
@@ -25,7 +25,4 @@ const getBlockHash = async (
 module.exports = { 
     getHash,
     getBlockHash,
-    isParameterAbsent,
-    isString,
-    isNumber
 };
